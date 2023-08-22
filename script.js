@@ -19,6 +19,18 @@ for (let i = 0; i < 4; i++) {
     grid.appendChild(container);
 }
 
-const reset = document.querySelector('.reset');
-const size = document.querySelector('.size');
+const resetButton = document.querySelector('.reset');
+const resetSize = document.querySelector('.size');
 
+function clearSquares() {
+    let squares = document.querySelectorAll('.child');
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].setAttribute('style', 'background: white;');
+    }
+};
+
+resetButton.addEventListener('click',
+    function() {
+        clearSquares();
+    }
+);
