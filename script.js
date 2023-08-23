@@ -2,6 +2,8 @@ const grid = document.querySelector('.grid');
 const body = document.querySelector('body');
 
 let mouseDown; 
+let isPen = true;
+
 document.addEventListener('mousedown', 
     function() {
         mouseDown = true;
@@ -27,13 +29,21 @@ for (let i = 0; i < 4; i++) {
         div.addEventListener('mouseenter', 
             function() {
                 if (mouseDown) {
-                    div.style.background = "black";
+                    if (isPen) {
+                        div.style.background = "black";
+                    } else {
+                        div.style.background = "white";
+                    }
                 }
             }
         );
         div.addEventListener('click', 
             function() {
-                div.style.background = "black"; 
+                if (isPen) {
+                    div.style.background = "black"; 
+                } else {
+                    div.style.background = "white";
+                }
             }
         );
     }
@@ -42,6 +52,8 @@ for (let i = 0; i < 4; i++) {
 
 const resetButton = document.querySelector('.reset');
 const resetSize = document.querySelector('.size');
+const eraseButton = document.querySelector('.eraser');
+const penButton = document.querySelector('.pen');
 
 function clearSquares() {
     let squares = document.querySelectorAll('.child');
@@ -74,13 +86,21 @@ function changeSize() {
             div.addEventListener('mouseenter', 
                 function() {
                     if (mouseDown) {
-                        div.style.background = "black";
+                        if (isPen) {
+                            div.style.background = "black";
+                        } else {
+                            div.style.background = "white";
+                        }
                     }
                 }
             );
             div.addEventListener('click', 
                 function() {
-                    div.style.background = "black"; 
+                    if (isPen) {
+                        div.style.background = "black"; 
+                    } else {
+                        div.style.background = "white";
+                    }
                 }
             );
         }
@@ -95,7 +115,20 @@ resetButton.addEventListener('click',
 );
 
 resetSize.addEventListener('click',
-    function () {
+    function() {
         changeSize(); 
     }
+);
+
+eraseButton.addEventListener('click',
+    function() {
+        isPen = false; 
+    }
+);
+
+penButton.addEventListener('click',
+    function() {
+        isPen = true;
+    }
+
 );
