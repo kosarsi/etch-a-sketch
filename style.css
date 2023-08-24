@@ -1,7 +1,3 @@
-.child {
-    border: 1px solid black;
-}
-
 .container {
     display: flex;
     flex-direction: column;
@@ -29,4 +25,9 @@ button {
 
 button:hover {
     cursor: pointer;
+}
+
+.inputs {
+    display: flex;
+    align-items: center;
 }

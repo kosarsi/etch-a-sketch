@@ -1,9 +1,15 @@
 const grid = document.querySelector('.grid');
 const body = document.querySelector('body');
+const slider = document.querySelector('.sizeSlider');
+
+slider.addEventListener('input',
+    function() {
+        changeSize(slider.value);
+    }
+);
 
 let mouseDown; 
 let isPen = true;
-
 document.addEventListener('mousedown', 
     function() {
         mouseDown = true;
@@ -51,7 +57,6 @@ for (let i = 0; i < 4; i++) {
 }
 
 const resetButton = document.querySelector('.reset');
-const resetSize = document.querySelector('.size');
 const eraseButton = document.querySelector('.eraser');
 const penButton = document.querySelector('.pen');
 
@@ -62,14 +67,10 @@ function clearSquares() {
     }
 };
 
-function changeSize() {
+function changeSize(newSize) {
     let squares = document.querySelectorAll('.container');
     for (let i = 0; i < squares.length; i++) {
         squares[i].remove();
-    }
-    let newSize = prompt("Enter a new size: ");
-    while (newSize <= 0 || newSize > 100) {
-        newSize = prompt("Please enter a number greater than 0 and less than or equal to 100: ");
     }
     for (let i = 0; i < newSize; i++) {
         let container = document.createElement('div');
@@ -84,25 +85,25 @@ function changeSize() {
             div.style.height = divSize + "px";
             div.style.width = divSize + "px";
             div.addEventListener('mouseenter', 
-                function() {
-                    if (mouseDown) {
-                        if (isPen) {
-                            div.style.background = "black";
-                        } else {
-                            div.style.background = "white";
-                        }
-                    }
-                }
-            );
-            div.addEventListener('click', 
-                function() {
+            function() {
+                if (mouseDown) {
                     if (isPen) {
-                        div.style.background = "black"; 
+                        div.style.background = "black";
                     } else {
                         div.style.background = "white";
                     }
                 }
-            );
+            }
+        );
+        div.addEventListener('click', 
+            function() {
+                if (isPen) {
+                    div.style.background = "black"; 
+                } else {
+                    div.style.background = "white";
+                }
+            }
+        );
         }
         grid.appendChild(container);
     }
@@ -111,12 +112,6 @@ function changeSize() {
 resetButton.addEventListener('click',
     function() {
         clearSquares();
-    }
-);
-
-resetSize.addEventListener('click',
-    function() {
-        changeSize(); 
     }
 );
 
